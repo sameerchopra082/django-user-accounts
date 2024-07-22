@@ -44,7 +44,7 @@ class Account(models.Model):
     def for_request(cls, request):
         user = getattr(request, "user", None)
         if user and user.is_authenticated:
-            account = user.account
+            account = getattr(user, "account", None)
             if account:
                 return account
         return AnonymousAccount(request)
